@@ -1,0 +1,30 @@
+{
+  "name": "igorveremsky/php-btce-api",
+  "description": "BTC-e PHP API client",
+  "keywords": [
+    "btc-e",
+    "api",
+    "client",
+    "public api",
+    "trade api"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Igor Veremsky",
+      "email": "igorveremsky@gmail.com",
+      "role": "Founder and project lead"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "BTCe\\": "src/"
+    }
+  }
+}
