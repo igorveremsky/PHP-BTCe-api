@@ -48,8 +48,13 @@ class BTCePublicApi extends BTCeApi {
 	 *
 	 * @return mixed
 	 */
-	public function getPairsTrades($pairs) {
-		return $this->makePublicMethod( self::PUBLIC_METHOD_TRADES, $pairs);
+	public function getPairsTrades($pairs, $limit = false) {
+		$extraGetString = false;
+		if ($limit && is_int($limit)) {
+			$extraGetString = 'limit=' . $limit;
+		}
+
+		return $this->makePublicMethod( self::PUBLIC_METHOD_TRADES, $pairs, $extraGetString);
 	}
 
 	/**
@@ -68,10 +73,11 @@ class BTCePublicApi extends BTCeApi {
 	 *
 	 * @param $methodType
 	 * @param bool $pairs
+	 * @param bool $extraGetString
 	 *
 	 * @return mixed
 	 */
-	protected function makePublicMethod($methodType, $pairs = false) {
+	protected function makePublicMethod($methodType, $pairs = false, $extraGetString = false) {
 		$this->checkPublicMethod($methodType);
 
 		$alias = $methodType;
@@ -79,6 +85,10 @@ class BTCePublicApi extends BTCeApi {
 		if ($pairs) {
 			$this->checkPairs($pairs);
 			$alias .= '/' . $this->generatePairsString($pairs);
+		}
+
+		if ($extraGetString) {
+			$alias .= '?' . $extraGetString;
 		}
 
 		$url = $this->_publicApiUrl . $alias;
